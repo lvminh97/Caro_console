@@ -66,6 +66,14 @@ public:
                 if(y + 3 < height && map[y][x] != 0 && map[y][x] == map[y + 1][x] && map[y][x] == map[y + 2][x] && map[y][x] == map[y + 3][x]){
                     return map[y][x];
                 }
+                // check diagonal 1
+                if(x + 3 < width && y + 3 < height && map[y][x] != 0 && map[y][x] == map[y + 1][x + 1] && map[y][x] == map[y + 2][x + 2] && map[y][x] == map[y + 3][x + 3]){
+                    return map[y][x];
+                }
+                // check diagonal 2
+                if(x + 3 < width && y >= 3 && map[y][x] != 0 && map[y][x] == map[y - 1][x + 1] && map[y][x] == map[y - 2][x + 2] && map[y][x] == map[y - 3][x + 3]){
+                    return map[y][x];
+                }
             }
         }
         return 0;

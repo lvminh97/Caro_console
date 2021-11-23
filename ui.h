@@ -53,9 +53,9 @@ public:
     }
 
     void turn(int player, short &x, short &y){
-        Utils::consoleGotoXY(0, board->getHeight() * 3 - 3);
+        Utils::consoleGotoXY(0, board->getHeight() * 3 - 5);
         printf("Player %d\'s turn:                   ", player);
-        Utils::consoleGotoXY(17, board->getHeight() * 3 - 3);
+        Utils::consoleGotoXY(17, board->getHeight() * 3 - 5);
         scanf("%hu%hu", &x, &y);
     }
 
@@ -75,6 +75,17 @@ public:
         }
         Utils::consoleGotoXY(cX, cY);
         Utils::setColor(15, 0);
+    }
+
+    void showResult(int result){
+        if(result == 0){
+            Utils::consoleGotoXY(0, board->getHeight() * 3 - 5);
+            printf("Result: Draw                          \n");
+        }
+        else{
+            Utils::consoleGotoXY(0, board->getHeight() * 3 - 5);
+            printf("Result: Player %d wins                \n", result);
+        }
     }
 
 };

@@ -28,6 +28,8 @@ int main(int argc, char **argv){
                 board.set(x, y, turn);
                 turn = turn != 1 ? 1 : 2;
             }
+            ui.showResult(board.checkWinCondition());
+            system("pause");
             break;
         default:
             isContinue = false;
