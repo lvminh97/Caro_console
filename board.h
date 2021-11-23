@@ -22,8 +22,12 @@ public:
         delete[] map;
     }
 
-    void initBoard(){
-
+    void init(){
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j < width; j++){
+                map[i][j] = 0;
+            }
+        }
     }
 
     int getWidth() const {
@@ -40,6 +44,10 @@ public:
 
     void set(int x, int y, int v){ // v in {0: empty, 1: player 1, 2: player 2}
         map[y][x] = v;
+    }
+
+    int checkWinCondition(){
+        return 0;
     }
 };
 

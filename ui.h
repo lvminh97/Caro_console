@@ -30,7 +30,18 @@ public:
         //
     }
 
-    
+    static char showMainMenu(){
+        short cX, cY;
+        system("cls");
+        printf("*------MAIN MENU-------*\n");
+        printf("Press number to choice: ");
+        consoleGetXY(cX, cY);
+        printf("\n1.Play with other player\n");
+        printf("2.Replay\n");
+        printf("3.Exit\n");
+        consoleGotoXY(cX, cY);
+        return getche();
+    }
 
     static void drawBoard(Board board){
         int w, h;
