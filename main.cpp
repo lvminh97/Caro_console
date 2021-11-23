@@ -1,23 +1,33 @@
 #include <iostream>
 #include <cstdlib>
-#include <conio.h>
 #include "board.h"
 #include "ui.h"
 
 using namespace std;
 
+UI ui;
+Board board(10, 10);
+
+int turn;
 int main(int argc, char **argv){
-    Board board(10, 10);
+    ui.init(&board);
     while(true){
         bool isContinue = true;
-        char choice = UI::showMainMenu();
+        char choice = ui.showMainMenu();
         switch (choice){
         case '1':
             board.init();
             system("cls");
             printf("=> Player 1 = X, Player 2 = O:\n\n");
-            UI::drawBoard(board);
-            while(true);
+            ui.drawBoard();
+            turn = 1;
+            short x, y;
+            while(board.checkWinCondition() == 0 && board.getRemain() > 0){
+                ui.turn(turn, x, y);
+                ui.put(x, y, turn);
+                board.set(x, y, turn);
+                turn = turn != 1 ? 1 : 2;
+            }
             break;
         default:
             isContinue = false;

@@ -2,85 +2,79 @@
 #define _UI_H
 
 #include <iostream>
-#include <windows.h>
+#include <conio.h>
+#include "utils.h"
 #include "board.h"
 
 class UI{
 private:
-    static void consoleGotoXY(short x, short y){
-        static HANDLE handle = NULL;  
-        if(handle == NULL)
-            handle = GetStdHandle(STD_OUTPUT_HANDLE);
-        COORD coor = {x, y};  
-        SetConsoleCursorPosition(handle, coor);
-    }
-
-    static void consoleGetXY(short &x, short &y){
-        static HANDLE handle = NULL;  
-        if(handle == NULL)
-            handle = GetStdHandle(STD_OUTPUT_HANDLE);
-        CONSOLE_SCREEN_BUFFER_INFO info;
-        GetConsoleScreenBufferInfo(handle, &info);
-        x = info.dwCursorPosition.X;
-        y = info.dwCursorPosition.Y;
-    }
+    Board *board;
 
 public:
-    UI(){
-        //
+    void init(Board *b){
+        this->board = b;
     }
 
-    static char showMainMenu(){
+    char showMainMenu(){
         short cX, cY;
+        system("color 0f");
         system("cls");
         printf("*------MAIN MENU-------*\n");
         printf("Press number to choice: ");
-        consoleGetXY(cX, cY);
+        Utils::consoleGetXY(cX, cY);
         printf("\n1.Play with other player\n");
         printf("2.Replay\n");
         printf("3.Exit\n");
-        consoleGotoXY(cX, cY);
+        Utils::consoleGotoXY(cX, cY);
         return getche();
     }
 
-    static void drawBoard(Board board){
-        int w, h;
-        w = board.getWidth();
-        h = board.getHeight();
-        //
+    void drawBoard(){
         printf("   ");
-        for(int i = 0; i < w; i++){
+        for(int i = 0; i < board->getWidth(); i++){
             printf(" %2d ", i);
         }
         printf("\n   ");
-        for(int i = 0; i < w; i++){
+        for(int i = 0; i < board->getWidth(); i++){
             printf("|---");
         }
         printf("|\n");
-        for(int i = 0; i < h; i++){
+        for(int i = 0; i < board->getHeight(); i++){
             printf("%2d |", i);
-            for(int j = 0; j < w; j++){
+            for(int j = 0; j < board->getWidth(); j++){
                 printf("   |");
             }
             printf("\n   |");
-            for(int j = 0; j < w; j++){
+            for(int j = 0; j < board->getWidth(); j++){
                 printf("---|");
             }
             printf("\n");
         }
     }
 
-    static void put(short x, short y, int v){
+    void turn(int player, short &x, short &y){
+        Utils::consoleGotoXY(0, board->getHeight() * 3 - 3);
+        printf("Player %d\'s turn:                   ", player);
+        Utils::consoleGotoXY(17, board->getHeight() * 3 - 3);
+        scanf("%hu%hu", &x, &y);
+    }
+
+    void put(short x, short y, int v){
         if(v != 1 && v != 2)
             return;
         short cX, cY;
-        consoleGetXY(cX, cY);
-        consoleGotoXY(5 + 4 * x, 4 + 2 * y);
-        if(v == 1)
+        Utils::consoleGetXY(cX, cY);
+        Utils::consoleGotoXY(5 + 4 * x, 4 + 2 * y);
+        if(v == 1){
+            Utils::setColor(12, 0);
             printf("X");
-        else 
+        }
+        else{
+            Utils::setColor(10, 0); 
             printf("O");
-        consoleGotoXY(cX, cY);
+        }
+        Utils::consoleGotoXY(cX, cY);
+        Utils::setColor(15, 0);
     }
 
 };
