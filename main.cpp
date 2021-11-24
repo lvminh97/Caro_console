@@ -2,13 +2,14 @@
 #include <cstdlib>
 #include "board.h"
 #include "ui.h"
+#include "play.h"
 
 using namespace std;
 
 UI ui;
 Board board(10, 10);
+int result;
 
-int turn;
 int main(int argc, char **argv){
     ui.init(&board);
     while(true){
@@ -17,18 +18,9 @@ int main(int argc, char **argv){
         switch (choice){
         case '1':
             board.init();
-            system("cls");
-            printf("=> Player 1 = X, Player 2 = O:\n\n");
             ui.drawBoard();
-            turn = 1;
-            short x, y;
-            while(board.checkWinCondition() == 0 && board.getRemain() > 0){
-                ui.turn(turn, x, y);
-                ui.put(x, y, turn);
-                board.set(x, y, turn);
-                turn = turn != 1 ? 1 : 2;
-            }
-            ui.showResult(board.checkWinCondition());
+            result = Play::run(&ui, &board);
+            ui.showResult(result);
             system("pause");
             break;
         default:

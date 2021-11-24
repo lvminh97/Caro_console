@@ -30,7 +30,8 @@ public:
     }
 
     void drawBoard(){
-        printf("   ");
+        system("cls");
+        printf("=> Player 1 = X, Player 2 = O:\n\n   ");
         for(int i = 0; i < board->getWidth(); i++){
             printf(" %2d ", i);
         }
