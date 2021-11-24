@@ -11,9 +11,10 @@ public:
         short x, y;
         while(board->getRemain() > 0 && board->checkWinCondition() == 0){
             ui->turn(turn, x, y);
-            ui->put(x, y, turn);
-            board->set(x, y, turn);
-            turn = turn != 1 ? 1 : 2;
+            if(board->set(x, y, turn) == true){
+                ui->put(x, y, turn);
+                turn = turn != 1 ? 1 : 2;
+            }
         }
         return board->checkWinCondition();
     }

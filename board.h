@@ -48,11 +48,13 @@ public:
         return map[y][x];
     }
 
-    void set(int x, int y, int v){ // v in {0: empty, 1: player 1, 2: player 2}
+    bool set(int x, int y, int v){ // v in {0: empty, 1: player 1, 2: player 2}
         if(map[y][x] == 0 && v != 0){
             remain--;
             map[y][x] = v;
+            return true;
         }
+        return false;
     }
 
     int checkWinCondition(){

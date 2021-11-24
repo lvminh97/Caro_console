@@ -23,8 +23,22 @@ public:
         printf("Press number to choice: ");
         Utils::consoleGetXY(cX, cY);
         printf("\n1.Play with other player\n");
-        printf("2.Replay\n");
+        printf("2.Play with BOT\n");
         printf("3.Exit\n");
+        Utils::consoleGotoXY(cX, cY);
+        return getche();
+    }
+
+    char selectBotLevel(){
+        short cX, cY;
+        Utils::consoleGotoXY(0, 6);
+        printf("*------Play with BOT-------*\n");
+        printf("Press number to choice: ");
+        Utils::consoleGetXY(cX, cY);
+        printf("\n1.Easy mode\n");
+        printf("2.Normal mode\n");
+        printf("3.Hard mode\n");
+        printf("4.Back to Main menu\n");
         Utils::consoleGotoXY(cX, cY);
         return getche();
     }
