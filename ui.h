@@ -15,6 +15,7 @@ public:
         this->board = b;
     }
 
+    // Hiển thị menu chọn chính
     char showMainMenu(){
         short cX, cY;
         system("color 0f");
@@ -29,6 +30,7 @@ public:
         return getche();
     }
 
+    // Hiển thị menu chọn BOT level
     char selectBotLevel(){
         short cX, cY;
         Utils::consoleGotoXY(0, 6);
@@ -43,6 +45,7 @@ public:
         return getche();
     }
 
+    // Kẻ bàn cờ
     void drawBoard(){
         system("cls");
         printf("=> Player 1 = X, Player 2 = O:\n\n   ");
@@ -67,6 +70,7 @@ public:
         }
     }
 
+    // Nhập tọa độ ô muốn đánh: player in {1, 2}
     void turn(int player, short &x, short &y){
         Utils::consoleGotoXY(0, board->getHeight() * 3 - 5);
         printf("Player %d\'s turn:                   ", player);
@@ -74,6 +78,7 @@ public:
         scanf("%hu%hu", &x, &y);
     }
 
+    // Cập nhật ô mới đánh lên bàn cờ
     void put(short x, short y, int v){
         if(v != 1 && v != 2)
             return;
@@ -92,6 +97,7 @@ public:
         Utils::setColor(15, 0);
     }
 
+    // Hiển thị kết quả
     void showResult(int result){
         if(result == 0){
             Utils::consoleGotoXY(0, board->getHeight() * 3 - 5);
