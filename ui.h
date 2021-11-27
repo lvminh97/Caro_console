@@ -25,7 +25,8 @@ public:
         Utils::consoleGetXY(cX, cY);
         printf("\n1.Play with other player\n");
         printf("2.Play with BOT\n");
-        printf("3.Exit\n");
+        printf("3.Replay\n");
+        printf("4.Exit\n");
         Utils::consoleGotoXY(cX, cY);
         return getche();
     }

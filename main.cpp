@@ -42,7 +42,13 @@ int main(int argc, char **argv){
                     break;
             }
             break;
-        default:
+        case '3':
+            ui.drawBoard();
+            result = Play::replay(&ui, &board);
+            ui.showResult(result);
+            system("pause");
+            break;
+        case '4':
             isContinue = false;
             break;
         }

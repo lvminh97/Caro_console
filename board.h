@@ -1,10 +1,14 @@
 #ifndef _BOARD_H
 #define _BOARD_H
 
+#include <vector>
+using namespace std;
+
 class Board{
 private:
     int height, width;
     int **map;
+    vector<vector<int>> history;
     int remain;
 public:
     // khởi tạo board với kích thước w x h
@@ -33,6 +37,12 @@ public:
                 map[i][j] = 0;
             }
         }
+        history.clear();
+        remain = width * height;
+    }
+
+    vector<vector<int>> getHistory(){
+        return history;
     }
 
     // Lấy chiều rộng
@@ -57,9 +67,10 @@ public:
 
     // Set trạng thái cho 1 ô: {0: empty, 1: player 1, 2: player 2}
     bool set(int x, int y, int v){
-        if(map[y][x] == 0 && v != 0){
+        if(x >= 0 && x < width && y >= 0 && y < height && map[y][x] == 0 && v != 0){
             remain--;
             map[y][x] = v;
+            history.push_back(vector<int> {x, y});
             return true;
         }
         return false;
