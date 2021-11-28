@@ -1,10 +1,16 @@
 #ifndef _UTILS_H
 #define _UTILS_H
 
+#include <cstdlib>
 #include <windows.h>
 
 class Utils{
 public:
+    // Xóa màn hình console
+    static void clrscr(){
+        system("cls");
+    }
+
     // Đưa con trỏ đi đến vị trí có tọa độ (x,y) trên console
     static void consoleGotoXY(short x, short y){
         HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
